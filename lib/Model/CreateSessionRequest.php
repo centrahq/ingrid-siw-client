@@ -65,7 +65,8 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         'cart' => '\Swagger\Client\Model\Cart',
         'external_id' => 'string',
         'customer' => '\Swagger\Client\Model\CustomerInfo',
-        'search_address' => '\Swagger\Client\Model\Address'
+        'search_address' => '\Swagger\Client\Model\Address',
+        'locales' => 'string[]'
     ];
 
     /**
@@ -81,7 +82,8 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         'cart' => null,
         'external_id' => null,
         'customer' => null,
-        'search_address' => null
+        'search_address' => null,
+        'locales' => null
     ];
 
     /**
@@ -118,7 +120,8 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         'cart' => 'cart',
         'external_id' => 'external_id',
         'customer' => 'customer',
-        'search_address' => 'search_address'
+        'search_address' => 'search_address',
+        'locales' => 'locales'
     ];
 
     /**
@@ -134,7 +137,8 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         'cart' => 'setCart',
         'external_id' => 'setExternalId',
         'customer' => 'setCustomer',
-        'search_address' => 'setSearchAddress'
+        'search_address' => 'setSearchAddress',
+        'locales' => 'setLocales'
     ];
 
     /**
@@ -150,7 +154,8 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         'cart' => 'getCart',
         'external_id' => 'getExternalId',
         'customer' => 'getCustomer',
-        'search_address' => 'getSearchAddress'
+        'search_address' => 'getSearchAddress',
+        'locales' => 'getLocales'
     ];
 
     /**
@@ -221,6 +226,7 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
         $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
         $this->container['customer'] = isset($data['customer']) ? $data['customer'] : null;
         $this->container['search_address'] = isset($data['search_address']) ? $data['search_address'] : null;
+        $this->container['locales'] = isset($data['locales']) ? $data['locales'] : null;
     }
 
     /**
@@ -436,6 +442,30 @@ class CreateSessionRequest implements ModelInterface, ArrayAccess
     public function setSearchAddress($search_address)
     {
         $this->container['search_address'] = $search_address;
+
+        return $this;
+    }
+
+    /**
+     * Gets locales
+     *
+     * @return string[]
+     */
+    public function getLocales()
+    {
+        return $this->container['locales'];
+    }
+
+    /**
+     * Sets locales
+     *
+     * @param string[] $locales locales
+     *
+     * @return $this
+     */
+    public function setLocales($locales)
+    {
+        $this->container['locales'] = $locales;
 
         return $this;
     }

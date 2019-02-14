@@ -58,7 +58,8 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'courier_instructions' => 'string',
-        'door_code' => 'string'
+        'door_code' => 'string',
+        'customer_number' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'courier_instructions' => null,
-        'door_code' => null
+        'door_code' => null,
+        'customer_number' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'courier_instructions' => 'courier_instructions',
-        'door_code' => 'door_code'
+        'door_code' => 'door_code',
+        'customer_number' => 'customer_number'
     ];
 
     /**
@@ -109,7 +112,8 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'courier_instructions' => 'setCourierInstructions',
-        'door_code' => 'setDoorCode'
+        'door_code' => 'setDoorCode',
+        'customer_number' => 'setCustomerNumber'
     ];
 
     /**
@@ -119,7 +123,8 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'courier_instructions' => 'getCourierInstructions',
-        'door_code' => 'getDoorCode'
+        'door_code' => 'getDoorCode',
+        'customer_number' => 'getCustomerNumber'
     ];
 
     /**
@@ -184,6 +189,7 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
     {
         $this->container['courier_instructions'] = isset($data['courier_instructions']) ? $data['courier_instructions'] : null;
         $this->container['door_code'] = isset($data['door_code']) ? $data['door_code'] : null;
+        $this->container['customer_number'] = isset($data['customer_number']) ? $data['customer_number'] : null;
     }
 
     /**
@@ -255,6 +261,30 @@ class AdditionalInfo implements ModelInterface, ArrayAccess
     public function setDoorCode($door_code)
     {
         $this->container['door_code'] = $door_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer_number
+     *
+     * @return string
+     */
+    public function getCustomerNumber()
+    {
+        return $this->container['customer_number'];
+    }
+
+    /**
+     * Sets customer_number
+     *
+     * @param string $customer_number customer number provided by the user.
+     *
+     * @return $this
+     */
+    public function setCustomerNumber($customer_number)
+    {
+        $this->container['customer_number'] = $customer_number;
 
         return $this;
     }
