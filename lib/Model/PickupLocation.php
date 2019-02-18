@@ -61,8 +61,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'address' => '\Swagger\Client\Model\Address',
 'distance' => '\Swagger\Client\Model\Distance',
 'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\ShippingPickupLocationType'    ];
+'meta' => 'map[string,string]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -75,8 +74,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'address' => null,
 'distance' => null,
 'operational_hours' => null,
-'meta' => null,
-'location_type' => null    ];
+'meta' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -110,8 +108,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'address' => 'address',
 'distance' => 'distance',
 'operational_hours' => 'operational_hours',
-'meta' => 'meta',
-'location_type' => 'location_type'    ];
+'meta' => 'meta'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -124,8 +121,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'address' => 'setAddress',
 'distance' => 'setDistance',
 'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
-'location_type' => 'setLocationType'    ];
+'meta' => 'setMeta'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,8 +134,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'address' => 'getAddress',
 'distance' => 'getDistance',
 'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
-'location_type' => 'getLocationType'    ];
+'meta' => 'getMeta'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,7 +200,6 @@ class PickupLocation implements ModelInterface, ArrayAccess
         $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
         $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
         $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
     }
 
     /**
@@ -373,30 +367,6 @@ class PickupLocation implements ModelInterface, ArrayAccess
     public function setMeta($meta)
     {
         $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_type
-     *
-     * @return \Swagger\Client\Model\ShippingPickupLocationType
-     */
-    public function getLocationType()
-    {
-        return $this->container['location_type'];
-    }
-
-    /**
-     * Sets location_type
-     *
-     * @param \Swagger\Client\Model\ShippingPickupLocationType $location_type location_type
-     *
-     * @return $this
-     */
-    public function setLocationType($location_type)
-    {
-        $this->container['location_type'] = $location_type;
 
         return $this;
     }
