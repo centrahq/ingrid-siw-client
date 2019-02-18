@@ -62,7 +62,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
 'distance' => '\Swagger\Client\Model\Distance',
 'operational_hours' => '\Swagger\Client\Model\OperationalHours',
 'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\ShippingPickupLocationType'    ];
+'location_type' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -380,7 +380,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
     /**
      * Gets location_type
      *
-     * @return \Swagger\Client\Model\ShippingPickupLocationType
+     * @return int
      */
     public function getLocationType()
     {
@@ -390,7 +390,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
     /**
      * Sets location_type
      *
-     * @param \Swagger\Client\Model\ShippingPickupLocationType $location_type location_type
+     * @param int $location_type location_type
      *
      * @return $this
      */
