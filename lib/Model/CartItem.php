@@ -62,7 +62,9 @@ class CartItem implements ModelInterface, ArrayAccess
 'out_of_stock' => 'bool',
 'dimensions' => '\Swagger\Client\Model\DimensionsDimensions',
 'quantity' => 'int',
-'weight' => 'int'    ];
+'weight' => 'int',
+'discount' => 'int',
+'price' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -76,7 +78,9 @@ class CartItem implements ModelInterface, ArrayAccess
 'out_of_stock' => 'boolean',
 'dimensions' => null,
 'quantity' => 'int32',
-'weight' => 'int32'    ];
+'weight' => 'int32',
+'discount' => 'int32',
+'price' => 'int32'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -111,7 +115,9 @@ class CartItem implements ModelInterface, ArrayAccess
 'out_of_stock' => 'out_of_stock',
 'dimensions' => 'dimensions',
 'quantity' => 'quantity',
-'weight' => 'weight'    ];
+'weight' => 'weight',
+'discount' => 'discount',
+'price' => 'price'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -125,7 +131,9 @@ class CartItem implements ModelInterface, ArrayAccess
 'out_of_stock' => 'setOutOfStock',
 'dimensions' => 'setDimensions',
 'quantity' => 'setQuantity',
-'weight' => 'setWeight'    ];
+'weight' => 'setWeight',
+'discount' => 'setDiscount',
+'price' => 'setPrice'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -139,7 +147,9 @@ class CartItem implements ModelInterface, ArrayAccess
 'out_of_stock' => 'getOutOfStock',
 'dimensions' => 'getDimensions',
 'quantity' => 'getQuantity',
-'weight' => 'getWeight'    ];
+'weight' => 'getWeight',
+'discount' => 'getDiscount',
+'price' => 'getPrice'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -206,6 +216,8 @@ class CartItem implements ModelInterface, ArrayAccess
         $this->container['dimensions'] = isset($data['dimensions']) ? $data['dimensions'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['weight'] = isset($data['weight']) ? $data['weight'] : null;
+        $this->container['discount'] = isset($data['discount']) ? $data['discount'] : null;
+        $this->container['price'] = isset($data['price']) ? $data['price'] : null;
     }
 
     /**
@@ -397,6 +409,54 @@ class CartItem implements ModelInterface, ArrayAccess
     public function setWeight($weight)
     {
         $this->container['weight'] = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Gets discount
+     *
+     * @return int
+     */
+    public function getDiscount()
+    {
+        return $this->container['discount'];
+    }
+
+    /**
+     * Sets discount
+     *
+     * @param int $discount Discount of the item.
+     *
+     * @return $this
+     */
+    public function setDiscount($discount)
+    {
+        $this->container['discount'] = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Gets price
+     *
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->container['price'];
+    }
+
+    /**
+     * Sets price
+     *
+     * @param int $price Price of the item.
+     *
+     * @return $this
+     */
+    public function setPrice($price)
+    {
+        $this->container['price'] = $price;
 
         return $this;
     }
