@@ -57,13 +57,15 @@ class Cart implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'total_value' => 'int',
-'total_discount' => 'int',
-'currency' => 'string',
-'pre_order' => 'bool',
-'voucher' => 'string',
-'shipping_date' => '\Swagger\Client\Model\DateTimeRange',
-'items' => '\Swagger\Client\Model\CartItem[]',
-'cart_id' => 'string'    ];
+        'total_discount' => 'int',
+        'currency' => 'string',
+        'pre_order' => 'bool',
+        'voucher' => 'string',
+        'shipping_date' => '\Swagger\Client\Model\DateTimeRange',
+        'items' => '\Swagger\Client\Model\CartItem[]',
+        'cart_id' => 'string',
+        'attributes' => 'array'
+    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,13 +74,15 @@ class Cart implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'total_value' => 'int32',
-'total_discount' => 'int32',
-'currency' => null,
-'pre_order' => 'boolean',
-'voucher' => null,
-'shipping_date' => null,
-'items' => null,
-'cart_id' => null    ];
+        'total_discount' => 'int32',
+        'currency' => null,
+        'pre_order' => 'boolean',
+        'voucher' => null,
+        'shipping_date' => null,
+        'items' => null,
+        'cart_id' => null,
+        'attributes' => null
+    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,13 +112,15 @@ class Cart implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'total_value' => 'total_value',
-'total_discount' => 'total_discount',
-'currency' => 'currency',
-'pre_order' => 'pre_order',
-'voucher' => 'voucher',
-'shipping_date' => 'shipping_date',
-'items' => 'items',
-'cart_id' => 'cart_id'    ];
+        'total_discount' => 'total_discount',
+        'currency' => 'currency',
+        'pre_order' => 'pre_order',
+        'voucher' => 'voucher',
+        'shipping_date' => 'shipping_date',
+        'items' => 'items',
+        'cart_id' => 'cart_id',
+        'attributes' => 'attributes'
+    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,13 +129,15 @@ class Cart implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'total_value' => 'setTotalValue',
-'total_discount' => 'setTotalDiscount',
-'currency' => 'setCurrency',
-'pre_order' => 'setPreOrder',
-'voucher' => 'setVoucher',
-'shipping_date' => 'setShippingDate',
-'items' => 'setItems',
-'cart_id' => 'setCartId'    ];
+        'total_discount' => 'setTotalDiscount',
+        'currency' => 'setCurrency',
+        'pre_order' => 'setPreOrder',
+        'voucher' => 'setVoucher',
+        'shipping_date' => 'setShippingDate',
+        'items' => 'setItems',
+        'cart_id' => 'setCartId',
+        'attributes' => 'setAttributes'
+    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,13 +146,15 @@ class Cart implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'total_value' => 'getTotalValue',
-'total_discount' => 'getTotalDiscount',
-'currency' => 'getCurrency',
-'pre_order' => 'getPreOrder',
-'voucher' => 'getVoucher',
-'shipping_date' => 'getShippingDate',
-'items' => 'getItems',
-'cart_id' => 'getCartId'    ];
+        'total_discount' => 'getTotalDiscount',
+        'currency' => 'getCurrency',
+        'pre_order' => 'getPreOrder',
+        'voucher' => 'getVoucher',
+        'shipping_date' => 'getShippingDate',
+        'items' => 'getItems',
+        'cart_id' => 'getCartId',
+        'attributes' => 'getAttributes'
+    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -212,6 +222,7 @@ class Cart implements ModelInterface, ArrayAccess
         $this->container['shipping_date'] = isset($data['shipping_date']) ? $data['shipping_date'] : null;
         $this->container['items'] = isset($data['items']) ? $data['items'] : null;
         $this->container['cart_id'] = isset($data['cart_id']) ? $data['cart_id'] : null;
+        $this->container['attributes'] = isset($data['attributes']) ? $data['attributes'] : null;
     }
 
     /**
@@ -355,6 +366,25 @@ class Cart implements ModelInterface, ArrayAccess
     public function setVoucher($voucher)
     {
         $this->container['voucher'] = $voucher;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttributes()
+    {
+        return $this->container['attributes'];
+    }
+
+    /**
+     * @param $attributes
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        $this->container['attributes'] = $attributes;
 
         return $this;
     }
