@@ -33,6 +33,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
+use Swagger\Client\ApiConnectionException;
 use Swagger\Client\ApiException;
 use Swagger\Client\Configuration;
 use Swagger\Client\HeaderSelector;
@@ -87,11 +88,11 @@ class DefaultApi
     }
     /**
      * Operation completeSession
-*
+     *
      * When the customer completes the purchase you also need to complete the session. At this point you will have to supply us with the address and the contact details of the user.
-*
-* @param  \Swagger\Client\Model\CompleteSessionRequest $body body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\CompleteSessionRequest $body body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Swagger\Client\Model\CompleteSessionResponse
@@ -104,13 +105,14 @@ class DefaultApi
 
     /**
      * Operation completeSessionWithHttpInfo
-*
+     *
      * When the customer completes the purchase you also need to complete the session. At this point you will have to supply us with the address and the contact details of the user.
-*
-* @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
+     * @throws RequestException on connection errors
      * @return array of \Swagger\Client\Model\CompleteSessionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function completeSessionWithHttpInfo($body)
@@ -123,30 +125,27 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
+                throw $e;
             }
 
             $statusCode = $response->getStatusCode();
 
             if ($statusCode < 200 || $statusCode > 299) {
+                $message = $response->getBody()->getContents();
                 throw new ApiException(
                     sprintf(
-                        '[%d] Error connecting to the API (%s)',
+                        '[%d] Error connecting to the API (%s): %s',
                         $statusCode,
-                        $request->getUri()
+                        $request->getUri(),
+                        $message
                     ),
                     $statusCode,
                     $response->getHeaders(),
-                    $response->getBody()
+                    $message
                 );
             }
 
-$responseBody = $response->getBody();
+            $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
@@ -172,7 +171,8 @@ $responseBody = $response->getBody();
                 }
             }
             switch ($e->getCode()) {
-case 200:$data = ObjectSerializer::deserialize(
+                case 200:
+                    $data = ObjectSerializer::deserialize(
                         $content,
                         '\Swagger\Client\Model\CompleteSessionResponse',
                         $e->getResponseHeaders()
@@ -189,8 +189,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * When the customer completes the purchase you also need to complete the session. At this point you will have to supply us with the address and the contact details of the user.
      *
-* @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -209,8 +209,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * When the customer completes the purchase you also need to complete the session. At this point you will have to supply us with the address and the contact details of the user.
      *
-* @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -223,7 +223,7 @@ case 200:$data = ObjectSerializer::deserialize(
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-$responseBody = $response->getBody();
+                    $responseBody = $response->getBody();
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -242,15 +242,17 @@ $responseBody = $response->getBody();
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+                    $message = $response->getBody()->getContents();
                     throw new ApiException(
                         sprintf(
-                            '[%d] Error connecting to the API (%s)',
+                            '[%d] Error connecting to the API (%s): %s',
                             $statusCode,
-                            $exception->getRequest()->getUri()
+                            $exception->getRequest()->getUri(),
+                            $message
                         ),
                         $statusCode,
                         $response->getHeaders(),
-                        $response->getBody()
+                        $message
                     );
                 }
             );
@@ -259,32 +261,32 @@ $responseBody = $response->getBody();
     /**
      * Create request for operation 'completeSession'
      *
-* @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CompleteSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
     protected function completeSessionRequest($body)
     {
-// verify the required parameter 'body' is set
+        // verify the required parameter 'body' is set
         if ($body === null) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $body when calling completeSession'
             );
         }
-$resourcePath = '/session.complete';
+        $resourcePath = '/session.complete';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-// body params
+        // body params
         $_tempBody = null;
-if (isset($body)) {
+        if (isset($body)) {
             $_tempBody = $body;
         }
-if ($multipart) {
+        if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
@@ -323,12 +325,12 @@ if ($multipart) {
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-// this endpoint requires API key authentication
+        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
             $headers['Authorization'] = $apiKey;
         }
-$defaultHeaders = [];
+        $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
         }
@@ -350,11 +352,11 @@ $defaultHeaders = [];
 
     /**
      * Operation createSession
-*
+     *
      * To add the Ingrid widget to the checkout page you will need to create a new session. This can be done by this call. When doing this you will need to provide some required information.
-*
-* @param  \Swagger\Client\Model\CreateSessionRequest $body body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\CreateSessionRequest $body body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Swagger\Client\Model\CreateSessionResponse
@@ -367,13 +369,14 @@ $defaultHeaders = [];
 
     /**
      * Operation createSessionWithHttpInfo
-*
+     *
      * To add the Ingrid widget to the checkout page you will need to create a new session. This can be done by this call. When doing this you will need to provide some required information.
-*
-* @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
+     * @throws RequestException on connection errors
      * @return array of \Swagger\Client\Model\CreateSessionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function createSessionWithHttpInfo($body)
@@ -386,30 +389,27 @@ $defaultHeaders = [];
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
+                throw $e;
             }
 
             $statusCode = $response->getStatusCode();
 
             if ($statusCode < 200 || $statusCode > 299) {
+                $message = $response->getBody()->getContents();
                 throw new ApiException(
                     sprintf(
-                        '[%d] Error connecting to the API (%s)',
+                        '[%d] Error connecting to the API (%s): %s',
                         $statusCode,
-                        $request->getUri()
+                        $request->getUri(),
+                        $message
                     ),
                     $statusCode,
                     $response->getHeaders(),
-                    $response->getBody()
+                    $message
                 );
             }
 
-$responseBody = $response->getBody();
+            $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
@@ -435,14 +435,15 @@ $responseBody = $response->getBody();
                 }
             }
             switch ($e->getCode()) {
-case 200:$data = ObjectSerializer::deserialize(
+                case 200:
+                    $data = ObjectSerializer::deserialize(
                         $content,
                         '\Swagger\Client\Model\CreateSessionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-}
+            }
             throw $e;
         }
     }
@@ -452,8 +453,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * To add the Ingrid widget to the checkout page you will need to create a new session. This can be done by this call. When doing this you will need to provide some required information.
      *
-* @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -472,8 +473,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * To add the Ingrid widget to the checkout page you will need to create a new session. This can be done by this call. When doing this you will need to provide some required information.
      *
-* @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -486,7 +487,7 @@ case 200:$data = ObjectSerializer::deserialize(
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-$responseBody = $response->getBody();
+                    $responseBody = $response->getBody();
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -505,15 +506,17 @@ $responseBody = $response->getBody();
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+                    $message = $response->getBody()->getContents();
                     throw new ApiException(
                         sprintf(
-                            '[%d] Error connecting to the API (%s)',
+                            '[%d] Error connecting to the API (%s): %s',
                             $statusCode,
-                            $exception->getRequest()->getUri()
+                            $exception->getRequest()->getUri(),
+                            $message
                         ),
                         $statusCode,
                         $response->getHeaders(),
-                        $response->getBody()
+                        $message
                     );
                 }
             );
@@ -522,32 +525,32 @@ $responseBody = $response->getBody();
     /**
      * Create request for operation 'createSession'
      *
-* @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\CreateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
     protected function createSessionRequest($body)
     {
-// verify the required parameter 'body' is set
+        // verify the required parameter 'body' is set
         if ($body === null) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $body when calling createSession'
             );
         }
-$resourcePath = '/session.create';
+        $resourcePath = '/session.create';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-// body params
+        // body params
         $_tempBody = null;
-if (isset($body)) {
+        if (isset($body)) {
             $_tempBody = $body;
         }
-if ($multipart) {
+        if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
@@ -586,12 +589,12 @@ if ($multipart) {
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-// this endpoint requires API key authentication
+        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
             $headers['Authorization'] = $apiKey;
         }
-$defaultHeaders = [];
+        $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
         }
@@ -613,11 +616,11 @@ $defaultHeaders = [];
 
     /**
      * Operation getSession
-*
+     *
      * Fetches a session by ID. Can be used for loading a previously created session that have been stored together with a customer's shopping cart from a previous visit.
-*
-* @param  string $id Session ID [required]. (optional)
-*
+     *
+     * @param  string $id Session ID [required]. (optional)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Swagger\Client\Model\GetSessionResponse
@@ -630,13 +633,14 @@ $defaultHeaders = [];
 
     /**
      * Operation getSessionWithHttpInfo
-*
+     *
      * Fetches a session by ID. Can be used for loading a previously created session that have been stored together with a customer's shopping cart from a previous visit.
-*
-* @param  string $id Session ID [required]. (optional)
-*
+     *
+     * @param  string $id Session ID [required]. (optional)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
+     * @throws RequestException on connection errors
      * @return array of \Swagger\Client\Model\GetSessionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getSessionWithHttpInfo($id = null)
@@ -649,30 +653,27 @@ $defaultHeaders = [];
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
+                throw $e;
             }
 
             $statusCode = $response->getStatusCode();
 
             if ($statusCode < 200 || $statusCode > 299) {
+                $message = $response->getBody()->getContents();
                 throw new ApiException(
                     sprintf(
-                        '[%d] Error connecting to the API (%s)',
+                        '[%d] Error connecting to the API (%s): %s',
                         $statusCode,
-                        $request->getUri()
+                        $request->getUri(),
+                        $message
                     ),
                     $statusCode,
                     $response->getHeaders(),
-                    $response->getBody()
+                    $message
                 );
             }
 
-$responseBody = $response->getBody();
+            $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
@@ -698,14 +699,15 @@ $responseBody = $response->getBody();
                 }
             }
             switch ($e->getCode()) {
-case 200:$data = ObjectSerializer::deserialize(
+                case 200:
+                    $data = ObjectSerializer::deserialize(
                         $content,
                         '\Swagger\Client\Model\GetSessionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-}
+            }
             throw $e;
         }
     }
@@ -715,8 +717,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * Fetches a session by ID. Can be used for loading a previously created session that have been stored together with a customer's shopping cart from a previous visit.
      *
-* @param  string $id Session ID [required]. (optional)
-*
+     * @param  string $id Session ID [required]. (optional)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -735,8 +737,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * Fetches a session by ID. Can be used for loading a previously created session that have been stored together with a customer's shopping cart from a previous visit.
      *
-* @param  string $id Session ID [required]. (optional)
-*
+     * @param  string $id Session ID [required]. (optional)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -749,7 +751,7 @@ case 200:$data = ObjectSerializer::deserialize(
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-$responseBody = $response->getBody();
+                    $responseBody = $response->getBody();
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -768,15 +770,17 @@ $responseBody = $response->getBody();
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+                    $message = $response->getBody()->getContents();
                     throw new ApiException(
                         sprintf(
-                            '[%d] Error connecting to the API (%s)',
+                            '[%d] Error connecting to the API (%s): %s',
                             $statusCode,
-                            $exception->getRequest()->getUri()
+                            $exception->getRequest()->getUri(),
+                            $message
                         ),
                         $statusCode,
                         $response->getHeaders(),
-                        $response->getBody()
+                        $message
                     );
                 }
             );
@@ -785,27 +789,27 @@ $responseBody = $response->getBody();
     /**
      * Create request for operation 'getSession'
      *
-* @param  string $id Session ID [required]. (optional)
-*
+     * @param  string $id Session ID [required]. (optional)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
     protected function getSessionRequest($id = null)
     {
-$resourcePath = '/session.get';
+        $resourcePath = '/session.get';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-// query params
-if ($id !== null) {
+        // query params
+        if ($id !== null) {
             $queryParams['id'] = ObjectSerializer::toQueryValue($id);
         }
-// body params
+        // body params
         $_tempBody = null;
-if ($multipart) {
+        if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
@@ -844,12 +848,12 @@ if ($multipart) {
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-// this endpoint requires API key authentication
+        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
             $headers['Authorization'] = $apiKey;
         }
-$defaultHeaders = [];
+        $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
         }
@@ -871,11 +875,11 @@ $defaultHeaders = [];
 
     /**
      * Operation updateSession
-*
+     *
      * Update the session with new information. Useful for cases where the customer or cart information is changed. The later being the most common case.
-*
-* @param  \Swagger\Client\Model\UpdateSessionRequest $body body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\UpdateSessionRequest $body body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Swagger\Client\Model\UpdateSessionResponse
@@ -888,13 +892,14 @@ $defaultHeaders = [];
 
     /**
      * Operation updateSessionWithHttpInfo
-*
+     *
      * Update the session with new information. Useful for cases where the customer or cart information is changed. The later being the most common case.
-*
-* @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
-*
+     *
+     * @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
+     *
      * @throws \Swagger\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
+     * @throws RequestException on connection errors
      * @return array of \Swagger\Client\Model\UpdateSessionResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateSessionWithHttpInfo($body)
@@ -907,30 +912,27 @@ $defaultHeaders = [];
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
+                throw $e;
             }
 
             $statusCode = $response->getStatusCode();
 
             if ($statusCode < 200 || $statusCode > 299) {
+                $message = $response->getBody()->getContents();
                 throw new ApiException(
                     sprintf(
-                        '[%d] Error connecting to the API (%s)',
+                        '[%d] Error connecting to the API (%s): %s',
                         $statusCode,
-                        $request->getUri()
+                        $request->getUri(),
+                        $message
                     ),
                     $statusCode,
                     $response->getHeaders(),
-                    $response->getBody()
+                    $message
                 );
             }
 
-$responseBody = $response->getBody();
+            $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
@@ -956,14 +958,15 @@ $responseBody = $response->getBody();
                 }
             }
             switch ($e->getCode()) {
-case 200:$data = ObjectSerializer::deserialize(
+                case 200:
+                    $data = ObjectSerializer::deserialize(
                         $content,
                         '\Swagger\Client\Model\UpdateSessionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-}
+            }
             throw $e;
         }
     }
@@ -973,8 +976,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * Update the session with new information. Useful for cases where the customer or cart information is changed. The later being the most common case.
      *
-* @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -993,8 +996,8 @@ case 200:$data = ObjectSerializer::deserialize(
      *
      * Update the session with new information. Useful for cases where the customer or cart information is changed. The later being the most common case.
      *
-* @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
@@ -1007,7 +1010,7 @@ case 200:$data = ObjectSerializer::deserialize(
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-$responseBody = $response->getBody();
+                    $responseBody = $response->getBody();
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -1026,15 +1029,17 @@ $responseBody = $response->getBody();
                 function ($exception) {
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
+                    $message = $response->getBody()->getContents();
                     throw new ApiException(
                         sprintf(
-                            '[%d] Error connecting to the API (%s)',
+                            '[%d] Error connecting to the API (%s): %s',
                             $statusCode,
-                            $exception->getRequest()->getUri()
+                            $exception->getRequest()->getUri(),
+                            $message
                         ),
                         $statusCode,
                         $response->getHeaders(),
-                        $response->getBody()
+                        $message
                     );
                 }
             );
@@ -1043,32 +1048,32 @@ $responseBody = $response->getBody();
     /**
      * Create request for operation 'updateSession'
      *
-* @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
-*
+     * @param  \Swagger\Client\Model\UpdateSessionRequest $body (required)
+     *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
     protected function updateSessionRequest($body)
     {
-// verify the required parameter 'body' is set
+        // verify the required parameter 'body' is set
         if ($body === null) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $body when calling updateSession'
             );
         }
-$resourcePath = '/session.update';
+        $resourcePath = '/session.update';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-// body params
+        // body params
         $_tempBody = null;
-if (isset($body)) {
+        if (isset($body)) {
             $_tempBody = $body;
         }
-if ($multipart) {
+        if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
                 ['application/json']
             );
@@ -1107,12 +1112,12 @@ if ($multipart) {
                 $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
             }
         }
-// this endpoint requires API key authentication
+        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
         if ($apiKey !== null) {
             $headers['Authorization'] = $apiKey;
         }
-$defaultHeaders = [];
+        $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
         }
@@ -1132,7 +1137,7 @@ $defaultHeaders = [];
         );
     }
 
-/**
+    /**
      * Create http client option
      *
      * @throws \RuntimeException on file opening failure
@@ -1140,7 +1145,9 @@ $defaultHeaders = [];
      */
     protected function createHttpClientOption()
     {
-        $options = [];
+        $options = [
+            'http_errors' => false,
+        ];
         if ($this->config->getDebug()) {
             $options[RequestOptions::DEBUG] = fopen($this->config->getDebugFile(), 'a');
             if (!$options[RequestOptions::DEBUG]) {
