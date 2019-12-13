@@ -33,7 +33,6 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiConnectionException;
 use Swagger\Client\ApiException;
 use Swagger\Client\Configuration;
 use Swagger\Client\HeaderSelector;
