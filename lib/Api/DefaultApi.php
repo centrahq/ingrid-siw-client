@@ -33,8 +33,6 @@ use Swagger\Client\ObjectSerializer;
  *
  * @category Class
  * @package  Swagger\Client
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
  */
 class DefaultApi
 {
