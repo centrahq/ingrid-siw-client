@@ -63,6 +63,7 @@ class Cart implements ModelInterface, ArrayAccess
 'voucher' => 'string',
 'shipping_date' => '\Swagger\Client\Model\DateTimeRange',
 'items' => '\Swagger\Client\Model\CartItem[]',
+'attributes' => 'string[]',
 'cart_id' => 'string'    ];
 
     /**
@@ -78,6 +79,7 @@ class Cart implements ModelInterface, ArrayAccess
 'voucher' => null,
 'shipping_date' => null,
 'items' => null,
+'attributes' => null,
 'cart_id' => null    ];
 
     /**
@@ -114,6 +116,7 @@ class Cart implements ModelInterface, ArrayAccess
 'voucher' => 'voucher',
 'shipping_date' => 'shipping_date',
 'items' => 'items',
+'attributes' => 'attributes',
 'cart_id' => 'cart_id'    ];
 
     /**
@@ -129,6 +132,7 @@ class Cart implements ModelInterface, ArrayAccess
 'voucher' => 'setVoucher',
 'shipping_date' => 'setShippingDate',
 'items' => 'setItems',
+'attributes' => 'setAttributes',
 'cart_id' => 'setCartId'    ];
 
     /**
@@ -144,6 +148,7 @@ class Cart implements ModelInterface, ArrayAccess
 'voucher' => 'getVoucher',
 'shipping_date' => 'getShippingDate',
 'items' => 'getItems',
+'attributes' => 'getAttributes',
 'cart_id' => 'getCartId'    ];
 
     /**
@@ -211,6 +216,7 @@ class Cart implements ModelInterface, ArrayAccess
         $this->container['voucher'] = isset($data['voucher']) ? $data['voucher'] : null;
         $this->container['shipping_date'] = isset($data['shipping_date']) ? $data['shipping_date'] : null;
         $this->container['items'] = isset($data['items']) ? $data['items'] : null;
+        $this->container['attributes'] = isset($data['attributes']) ? $data['attributes'] : null;
         $this->container['cart_id'] = isset($data['cart_id']) ? $data['cart_id'] : null;
     }
 
@@ -403,6 +409,30 @@ class Cart implements ModelInterface, ArrayAccess
     public function setItems($items)
     {
         $this->container['items'] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributes
+     *
+     * @return string[]
+     */
+    public function getAttributes()
+    {
+        return $this->container['attributes'];
+    }
+
+    /**
+     * Sets attributes
+     *
+     * @param string[] $attributes attributes
+     *
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        $this->container['attributes'] = $attributes;
 
         return $this;
     }
