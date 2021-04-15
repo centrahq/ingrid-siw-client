@@ -1,5 +1,3 @@
-Overrides some code generated for the client, because ingrid's API spec does not match what they actually return. until they fix it the client shouldn't be regenerated.
-
 # ingrid-siw-client
 Client for Ingrid's SIW api
 
