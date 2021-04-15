@@ -42,11 +42,12 @@ class RouteLegLocationType
 {
     /**
      * Possible values of this enum
+     * temporary patch until ingrid update their swagger - dont release this branch
      */
-    const UNKNOWN = 'UNKNOWN';
-const WAREHOUSE = 'WAREHOUSE';
-const STORE = 'STORE';
-const HOME = 'HOME';
+    const UNKNOWN = 0;
+const WAREHOUSE = 1;
+const STORE = 2;
+const HOME = 3;
     /**
      * Gets allowable values of the enum
      * @return string[]
