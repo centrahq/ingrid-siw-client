@@ -1,6 +1,6 @@
 <?php
 /**
- * CompleteSessionResponse
+ * Cost
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * CompleteSessionResponse Class Doc Comment
+ * Cost Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CompleteSessionResponse implements ModelInterface, ArrayAccess
+class Cost implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CompleteSessionResponse';
+    protected static $swaggerModelName = 'Cost';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'session' => '\Swagger\Client\Model\Session',
-'tos_id' => 'string'    ];
+        'amount' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +64,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'session' => null,
-'tos_id' => null    ];
+        'amount' => 'int32'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +93,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-'tos_id' => 'tos_id'    ];
+        'amount' => 'amount'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +101,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-'tos_id' => 'setTosId'    ];
+        'amount' => 'setAmount'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +109,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-'tos_id' => 'getTosId'    ];
+        'amount' => 'getAmount'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +169,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['tos_id'] = isset($data['tos_id']) ? $data['tos_id'] : null;
+        $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;
     }
 
     /**
@@ -203,49 +197,25 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets session
+     * Gets amount
      *
-     * @return \Swagger\Client\Model\Session
+     * @return int
      */
-    public function getSession()
+    public function getAmount()
     {
-        return $this->container['session'];
+        return $this->container['amount'];
     }
 
     /**
-     * Sets session
+     * Sets amount
      *
-     * @param \Swagger\Client\Model\Session $session session
+     * @param int $amount amount
      *
      * @return $this
      */
-    public function setSession($session)
+    public function setAmount($amount)
     {
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets tos_id
-     *
-     * @return string
-     */
-    public function getTosId()
-    {
-        return $this->container['tos_id'];
-    }
-
-    /**
-     * Sets tos_id
-     *
-     * @param string $tos_id tos_id
-     *
-     * @return $this
-     */
-    public function setTosId($tos_id)
-    {
-        $this->container['tos_id'] = $tos_id;
+        $this->container['amount'] = $amount;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * SelectedShippingOption
+ * ResultShipping
  *
  * PHP version 5
  *
@@ -32,14 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * SelectedShippingOption Class Doc Comment
+ * ResultShipping Class Doc Comment
  *
  * @category Class
+ * @description How the package should be shipped to the end customer.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class SelectedShippingOption implements ModelInterface, ArrayAccess
+class ResultShipping implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +49,7 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SelectedShippingOption';
+    protected static $swaggerModelName = 'ResultShipping';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,15 +61,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
 'delivery_type' => 'string',
 'carrier' => 'string',
 'product' => 'string',
-'price' => 'int',
-'currency' => 'string',
 'location' => '\Swagger\Client\Model\PickupLocation',
-'time_slot' => '\Swagger\Client\Model\TimeSlot',
-'shipping_category' => 'string',
+'delivery_time' => '\Swagger\Client\Model\TimeSlot',
 'external_method_id' => 'string',
+'addons' => '\Swagger\Client\Model\CarrierAddon[]',
+'supports' => '\Swagger\Client\Model\Supports',
 'meta' => 'map[string,string]',
-'routes' => '\Swagger\Client\Model\Route[]',
-'category_tags' => '\Swagger\Client\Model\Tag[]'    ];
+'route' => '\Swagger\Client\Model\Route',
+'delivery_addons' => '\Swagger\Client\Model\ResultDeliveryAddon[]',
+'warehouse' => '\Swagger\Client\Model\ResultWarehouse'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -80,15 +81,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
 'delivery_type' => null,
 'carrier' => null,
 'product' => null,
-'price' => 'int32',
-'currency' => null,
 'location' => null,
-'time_slot' => null,
-'shipping_category' => null,
+'delivery_time' => null,
 'external_method_id' => null,
+'addons' => null,
+'supports' => null,
 'meta' => null,
-'routes' => null,
-'category_tags' => null    ];
+'route' => null,
+'delivery_addons' => null,
+'warehouse' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -121,15 +122,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
 'delivery_type' => 'delivery_type',
 'carrier' => 'carrier',
 'product' => 'product',
-'price' => 'price',
-'currency' => 'currency',
 'location' => 'location',
-'time_slot' => 'time_slot',
-'shipping_category' => 'shipping_category',
+'delivery_time' => 'delivery_time',
 'external_method_id' => 'external_method_id',
+'addons' => 'addons',
+'supports' => 'supports',
 'meta' => 'meta',
-'routes' => 'routes',
-'category_tags' => 'category_tags'    ];
+'route' => 'route',
+'delivery_addons' => 'delivery_addons',
+'warehouse' => 'warehouse'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -141,15 +142,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
 'delivery_type' => 'setDeliveryType',
 'carrier' => 'setCarrier',
 'product' => 'setProduct',
-'price' => 'setPrice',
-'currency' => 'setCurrency',
 'location' => 'setLocation',
-'time_slot' => 'setTimeSlot',
-'shipping_category' => 'setShippingCategory',
+'delivery_time' => 'setDeliveryTime',
 'external_method_id' => 'setExternalMethodId',
+'addons' => 'setAddons',
+'supports' => 'setSupports',
 'meta' => 'setMeta',
-'routes' => 'setRoutes',
-'category_tags' => 'setCategoryTags'    ];
+'route' => 'setRoute',
+'delivery_addons' => 'setDeliveryAddons',
+'warehouse' => 'setWarehouse'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -161,15 +162,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
 'delivery_type' => 'getDeliveryType',
 'carrier' => 'getCarrier',
 'product' => 'getProduct',
-'price' => 'getPrice',
-'currency' => 'getCurrency',
 'location' => 'getLocation',
-'time_slot' => 'getTimeSlot',
-'shipping_category' => 'getShippingCategory',
+'delivery_time' => 'getDeliveryTime',
 'external_method_id' => 'getExternalMethodId',
+'addons' => 'getAddons',
+'supports' => 'getSupports',
 'meta' => 'getMeta',
-'routes' => 'getRoutes',
-'category_tags' => 'getCategoryTags'    ];
+'route' => 'getRoute',
+'delivery_addons' => 'getDeliveryAddons',
+'warehouse' => 'getWarehouse'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -233,15 +234,15 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
         $this->container['delivery_type'] = isset($data['delivery_type']) ? $data['delivery_type'] : null;
         $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
         $this->container['product'] = isset($data['product']) ? $data['product'] : null;
-        $this->container['price'] = isset($data['price']) ? $data['price'] : null;
-        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         $this->container['location'] = isset($data['location']) ? $data['location'] : null;
-        $this->container['time_slot'] = isset($data['time_slot']) ? $data['time_slot'] : null;
-        $this->container['shipping_category'] = isset($data['shipping_category']) ? $data['shipping_category'] : null;
+        $this->container['delivery_time'] = isset($data['delivery_time']) ? $data['delivery_time'] : null;
         $this->container['external_method_id'] = isset($data['external_method_id']) ? $data['external_method_id'] : null;
+        $this->container['addons'] = isset($data['addons']) ? $data['addons'] : null;
+        $this->container['supports'] = isset($data['supports']) ? $data['supports'] : null;
         $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['routes'] = isset($data['routes']) ? $data['routes'] : null;
-        $this->container['category_tags'] = isset($data['category_tags']) ? $data['category_tags'] : null;
+        $this->container['route'] = isset($data['route']) ? $data['route'] : null;
+        $this->container['delivery_addons'] = isset($data['delivery_addons']) ? $data['delivery_addons'] : null;
+        $this->container['warehouse'] = isset($data['warehouse']) ? $data['warehouse'] : null;
     }
 
     /**
@@ -281,7 +282,7 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets shipping_method
      *
-     * @param string $shipping_method shipping_method
+     * @param string $shipping_method Ingrid's ID of the shipping product. Example `bst-std` for BEST Delivery.
      *
      * @return $this
      */
@@ -305,7 +306,7 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets delivery_type
      *
-     * @param string $delivery_type delivery_type
+     * @param string $delivery_type Type of delivery (pickup, instore, mailbox, delivery).
      *
      * @return $this
      */
@@ -329,7 +330,7 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets carrier
      *
-     * @param string $carrier carrier
+     * @param string $carrier Name of the shipping company.
      *
      * @return $this
      */
@@ -353,61 +354,13 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets product
      *
-     * @param string $product product
+     * @param string $product Name of the shipping product.
      *
      * @return $this
      */
     public function setProduct($product)
     {
         $this->container['product'] = $product;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
-     *
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->container['price'];
-    }
-
-    /**
-     * Sets price
-     *
-     * @param int $price price
-     *
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        $this->container['price'] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency
-     *
-     * @return string
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'];
-    }
-
-    /**
-     * Sets currency
-     *
-     * @param string $currency currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
-    {
-        $this->container['currency'] = $currency;
 
         return $this;
     }
@@ -437,49 +390,25 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets time_slot
+     * Gets delivery_time
      *
      * @return \Swagger\Client\Model\TimeSlot
      */
-    public function getTimeSlot()
+    public function getDeliveryTime()
     {
-        return $this->container['time_slot'];
+        return $this->container['delivery_time'];
     }
 
     /**
-     * Sets time_slot
+     * Sets delivery_time
      *
-     * @param \Swagger\Client\Model\TimeSlot $time_slot time_slot
+     * @param \Swagger\Client\Model\TimeSlot $delivery_time delivery_time
      *
      * @return $this
      */
-    public function setTimeSlot($time_slot)
+    public function setDeliveryTime($delivery_time)
     {
-        $this->container['time_slot'] = $time_slot;
-
-        return $this;
-    }
-
-    /**
-     * Gets shipping_category
-     *
-     * @return string
-     */
-    public function getShippingCategory()
-    {
-        return $this->container['shipping_category'];
-    }
-
-    /**
-     * Sets shipping_category
-     *
-     * @param string $shipping_category Shipping category under which the selected shipping options are grouped. Shipping categories are setup and configured in the merchant admin tool.
-     *
-     * @return $this
-     */
-    public function setShippingCategory($shipping_category)
-    {
-        $this->container['shipping_category'] = $shipping_category;
+        $this->container['delivery_time'] = $delivery_time;
 
         return $this;
     }
@@ -497,13 +426,61 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets external_method_id
      *
-     * @param string $external_method_id External method identifier that can be used for custom shipping methods mappings, eg overriding a shipping product id from Ingrid by merchant's own. This mapping needs to be setup in the Merchant Admin tool.
+     * @param string $external_method_id External method identifier, can be used for merchant-specific shipping methods mappings, eg override.
      *
      * @return $this
      */
     public function setExternalMethodId($external_method_id)
     {
         $this->container['external_method_id'] = $external_method_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets addons
+     *
+     * @return \Swagger\Client\Model\CarrierAddon[]
+     */
+    public function getAddons()
+    {
+        return $this->container['addons'];
+    }
+
+    /**
+     * Sets addons
+     *
+     * @param \Swagger\Client\Model\CarrierAddon[] $addons Shipping products addons that are enabled by default. Can be configured in the Merchant Admin tool.
+     *
+     * @return $this
+     */
+    public function setAddons($addons)
+    {
+        $this->container['addons'] = $addons;
+
+        return $this;
+    }
+
+    /**
+     * Gets supports
+     *
+     * @return \Swagger\Client\Model\Supports
+     */
+    public function getSupports()
+    {
+        return $this->container['supports'];
+    }
+
+    /**
+     * Sets supports
+     *
+     * @param \Swagger\Client\Model\Supports $supports supports
+     *
+     * @return $this
+     */
+    public function setSupports($supports)
+    {
+        $this->container['supports'] = $supports;
 
         return $this;
     }
@@ -521,7 +498,7 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     /**
      * Sets meta
      *
-     * @param map[string,string] $meta meta
+     * @param map[string,string] $meta Carrier specific metadata related to the shipping option, for example addons.
      *
      * @return $this
      */
@@ -533,49 +510,73 @@ class SelectedShippingOption implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets routes
+     * Gets route
      *
-     * @return \Swagger\Client\Model\Route[]
+     * @return \Swagger\Client\Model\Route
      */
-    public function getRoutes()
+    public function getRoute()
     {
-        return $this->container['routes'];
+        return $this->container['route'];
     }
 
     /**
-     * Sets routes
+     * Sets route
      *
-     * @param \Swagger\Client\Model\Route[] $routes Routes represent a list of delivery steps. This is used for so called chained deliveries where there are more than two deliveries involved to deliver a package to the customer. For example from central warehouse to the service point and then from a service point to customer's house. For a non-chained delivery this will contain only one step.
+     * @param \Swagger\Client\Model\Route $route route
      *
      * @return $this
      */
-    public function setRoutes($routes)
+    public function setRoute($route)
     {
-        $this->container['routes'] = $routes;
+        $this->container['route'] = $route;
 
         return $this;
     }
 
     /**
-     * Gets category_tags
+     * Gets delivery_addons
      *
-     * @return \Swagger\Client\Model\Tag[]
+     * @return \Swagger\Client\Model\ResultDeliveryAddon[]
      */
-    public function getCategoryTags()
+    public function getDeliveryAddons()
     {
-        return $this->container['category_tags'];
+        return $this->container['delivery_addons'];
     }
 
     /**
-     * Sets category_tags
+     * Sets delivery_addons
      *
-     * @param \Swagger\Client\Model\Tag[] $category_tags category_tags
+     * @param \Swagger\Client\Model\ResultDeliveryAddon[] $delivery_addons Selected delivery addons.
      *
      * @return $this
      */
-    public function setCategoryTags($category_tags)
+    public function setDeliveryAddons($delivery_addons)
     {
-        $this->container['category_tags'] = $category_tags;
+        $this->container['delivery_addons'] = $delivery_addons;
+
+        return $this;
+    }
+
+    /**
+     * Gets warehouse
+     *
+     * @return \Swagger\Client\Model\ResultWarehouse
+     */
+    public function getWarehouse()
+    {
+        return $this->container['warehouse'];
+    }
+
+    /**
+     * Sets warehouse
+     *
+     * @param \Swagger\Client\Model\ResultWarehouse $warehouse warehouse
+     *
+     * @return $this
+     */
+    public function setWarehouse($warehouse)
+    {
+        $this->container['warehouse'] = $warehouse;
 
         return $this;
     }

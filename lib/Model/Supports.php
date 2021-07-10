@@ -1,6 +1,6 @@
 <?php
 /**
- * PickupLocation
+ * Supports
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PickupLocation Class Doc Comment
+ * Supports Class Doc Comment
  *
  * @category Class
- * @description Contains information about the pickup service point as returned by the carrier.
+ * @description Contains information about features that a shipping option supports. Configurable in Merchant Admin tool.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PickupLocation implements ModelInterface, ArrayAccess
+class Supports implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PickupLocation';
+    protected static $swaggerModelName = 'Supports';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-'name' => 'string',
-'address' => '\Swagger\Client\Model\Address',
-'distance' => '\Swagger\Client\Model\Distance',
-'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\PickupLocationType',
-'sections' => '\Swagger\Client\Model\Section[]'    ];
+        'search' => 'bool',
+'door_code' => 'bool',
+'courier_instructions' => 'bool',
+'customer_number' => 'bool'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,14 +68,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-'name' => null,
-'address' => null,
-'distance' => null,
-'operational_hours' => null,
-'meta' => null,
-'location_type' => null,
-'sections' => null    ];
+        'search' => null,
+'door_code' => null,
+'courier_instructions' => null,
+'customer_number' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,14 +100,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'external_id',
-'name' => 'name',
-'address' => 'address',
-'distance' => 'distance',
-'operational_hours' => 'operational_hours',
-'meta' => 'meta',
-'location_type' => 'location_type',
-'sections' => 'sections'    ];
+        'search' => 'search',
+'door_code' => 'door_code',
+'courier_instructions' => 'courier_instructions',
+'customer_number' => 'customer_number'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,14 +111,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-'name' => 'setName',
-'address' => 'setAddress',
-'distance' => 'setDistance',
-'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
-'location_type' => 'setLocationType',
-'sections' => 'setSections'    ];
+        'search' => 'setSearch',
+'door_code' => 'setDoorCode',
+'courier_instructions' => 'setCourierInstructions',
+'customer_number' => 'setCustomerNumber'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,14 +122,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-'name' => 'getName',
-'address' => 'getAddress',
-'distance' => 'getDistance',
-'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
-'location_type' => 'getLocationType',
-'sections' => 'getSections'    ];
+        'search' => 'getSearch',
+'door_code' => 'getDoorCode',
+'courier_instructions' => 'getCourierInstructions',
+'customer_number' => 'getCustomerNumber'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,14 +185,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
-        $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
-        $this->container['sections'] = isset($data['sections']) ? $data['sections'] : null;
+        $this->container['search'] = isset($data['search']) ? $data['search'] : null;
+        $this->container['door_code'] = isset($data['door_code']) ? $data['door_code'] : null;
+        $this->container['courier_instructions'] = isset($data['courier_instructions']) ? $data['courier_instructions'] : null;
+        $this->container['customer_number'] = isset($data['customer_number']) ? $data['customer_number'] : null;
     }
 
     /**
@@ -240,193 +216,97 @@ class PickupLocation implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets external_id
+     * Gets search
      *
-     * @return string
+     * @return bool
      */
-    public function getExternalId()
+    public function getSearch()
     {
-        return $this->container['external_id'];
+        return $this->container['search'];
     }
 
     /**
-     * Sets external_id
+     * Sets search
      *
-     * @param string $external_id Carrier specific ID of the service point location returned by the carrier.
+     * @param bool $search search
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setSearch($search)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['search'] = $search;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets door_code
      *
-     * @return string
+     * @return bool
      */
-    public function getName()
+    public function getDoorCode()
     {
-        return $this->container['name'];
+        return $this->container['door_code'];
     }
 
     /**
-     * Sets name
+     * Sets door_code
      *
-     * @param string $name name
+     * @param bool $door_code Indicates if shipping option supports door code. If true, a door code input will be displayed in the shipping selector widget. Only applicable for home delivery type.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setDoorCode($door_code)
     {
-        $this->container['name'] = $name;
+        $this->container['door_code'] = $door_code;
 
         return $this;
     }
 
     /**
-     * Gets address
+     * Gets courier_instructions
      *
-     * @return \Swagger\Client\Model\Address
+     * @return bool
      */
-    public function getAddress()
+    public function getCourierInstructions()
     {
-        return $this->container['address'];
+        return $this->container['courier_instructions'];
     }
 
     /**
-     * Sets address
+     * Sets courier_instructions
      *
-     * @param \Swagger\Client\Model\Address $address address
+     * @param bool $courier_instructions Indicates if shipping option supports courier notes. If true, a courier instructions input will be displayed in the shipping selector widget. Only applicable for home delivery type.
      *
      * @return $this
      */
-    public function setAddress($address)
+    public function setCourierInstructions($courier_instructions)
     {
-        $this->container['address'] = $address;
+        $this->container['courier_instructions'] = $courier_instructions;
 
         return $this;
     }
 
     /**
-     * Gets distance
+     * Gets customer_number
      *
-     * @return \Swagger\Client\Model\Distance
+     * @return bool
      */
-    public function getDistance()
+    public function getCustomerNumber()
     {
-        return $this->container['distance'];
+        return $this->container['customer_number'];
     }
 
     /**
-     * Sets distance
+     * Sets customer_number
      *
-     * @param \Swagger\Client\Model\Distance $distance distance
+     * @param bool $customer_number Indicates if shipping option supports carrier specific customer number. If true, a carrier number input will be displayed in the shipping selector widget. Only applicable for DHL Germany at this moment, where customer has to provide a number that identifies a pickup locker.
      *
      * @return $this
      */
-    public function setDistance($distance)
+    public function setCustomerNumber($customer_number)
     {
-        $this->container['distance'] = $distance;
-
-        return $this;
-    }
-
-    /**
-     * Gets operational_hours
-     *
-     * @return \Swagger\Client\Model\OperationalHours
-     */
-    public function getOperationalHours()
-    {
-        return $this->container['operational_hours'];
-    }
-
-    /**
-     * Sets operational_hours
-     *
-     * @param \Swagger\Client\Model\OperationalHours $operational_hours operational_hours
-     *
-     * @return $this
-     */
-    public function setOperationalHours($operational_hours)
-    {
-        $this->container['operational_hours'] = $operational_hours;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return map[string,string]
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param map[string,string] $meta meta
-     *
-     * @return $this
-     */
-    public function setMeta($meta)
-    {
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_type
-     *
-     * @return \Swagger\Client\Model\PickupLocationType
-     */
-    public function getLocationType()
-    {
-        return $this->container['location_type'];
-    }
-
-    /**
-     * Sets location_type
-     *
-     * @param \Swagger\Client\Model\PickupLocationType $location_type location_type
-     *
-     * @return $this
-     */
-    public function setLocationType($location_type)
-    {
-        $this->container['location_type'] = $location_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets sections
-     *
-     * @return \Swagger\Client\Model\Section[]
-     */
-    public function getSections()
-    {
-        return $this->container['sections'];
-    }
-
-    /**
-     * Sets sections
-     *
-     * @param \Swagger\Client\Model\Section[] $sections sections
-     *
-     * @return $this
-     */
-    public function setSections($sections)
-    {
-        $this->container['sections'] = $sections;
+        $this->container['customer_number'] = $customer_number;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PickupLocation
+ * PriceComponent
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PickupLocation Class Doc Comment
+ * PriceComponent Class Doc Comment
  *
  * @category Class
- * @description Contains information about the pickup service point as returned by the carrier.
+ * @description Specifies a single price component.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PickupLocation implements ModelInterface, ArrayAccess
+class PriceComponent implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PickupLocation';
+    protected static $swaggerModelName = 'PriceComponent';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-'name' => 'string',
-'address' => '\Swagger\Client\Model\Address',
-'distance' => '\Swagger\Client\Model\Distance',
-'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\PickupLocationType',
-'sections' => '\Swagger\Client\Model\Section[]'    ];
+        'id' => 'string',
+'type' => '\Swagger\Client\Model\PriceComponentType',
+'value' => 'int',
+'vat_rate' => 'float',
+'vat' => 'int'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,14 +69,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-'name' => null,
-'address' => null,
-'distance' => null,
-'operational_hours' => null,
-'meta' => null,
-'location_type' => null,
-'sections' => null    ];
+        'id' => null,
+'type' => null,
+'value' => 'int32',
+'vat_rate' => 'float',
+'vat' => 'int32'    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,14 +102,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'external_id',
-'name' => 'name',
-'address' => 'address',
-'distance' => 'distance',
-'operational_hours' => 'operational_hours',
-'meta' => 'meta',
-'location_type' => 'location_type',
-'sections' => 'sections'    ];
+        'id' => 'id',
+'type' => 'type',
+'value' => 'value',
+'vat_rate' => 'vat_rate',
+'vat' => 'vat'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,14 +114,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-'name' => 'setName',
-'address' => 'setAddress',
-'distance' => 'setDistance',
-'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
-'location_type' => 'setLocationType',
-'sections' => 'setSections'    ];
+        'id' => 'setId',
+'type' => 'setType',
+'value' => 'setValue',
+'vat_rate' => 'setVatRate',
+'vat' => 'setVat'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,14 +126,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-'name' => 'getName',
-'address' => 'getAddress',
-'distance' => 'getDistance',
-'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
-'location_type' => 'getLocationType',
-'sections' => 'getSections'    ];
+        'id' => 'getId',
+'type' => 'getType',
+'value' => 'getValue',
+'vat_rate' => 'getVatRate',
+'vat' => 'getVat'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,14 +190,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
-        $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
-        $this->container['sections'] = isset($data['sections']) ? $data['sections'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['vat_rate'] = isset($data['vat_rate']) ? $data['vat_rate'] : null;
+        $this->container['vat'] = isset($data['vat']) ? $data['vat'] : null;
     }
 
     /**
@@ -240,193 +222,121 @@ class PickupLocation implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets external_id
+     * Gets id
      *
      * @return string
      */
-    public function getExternalId()
+    public function getId()
     {
-        return $this->container['external_id'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets external_id
+     * Sets id
      *
-     * @param string $external_id Carrier specific ID of the service point location returned by the carrier.
+     * @param string $id id
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setId($id)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets type
      *
-     * @return string
+     * @return \Swagger\Client\Model\PriceComponentType
      */
-    public function getName()
+    public function getType()
     {
-        return $this->container['name'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets name
+     * Sets type
      *
-     * @param string $name name
+     * @param \Swagger\Client\Model\PriceComponentType $type type
      *
      * @return $this
      */
-    public function setName($name)
+    public function setType($type)
     {
-        $this->container['name'] = $name;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets address
+     * Gets value
      *
-     * @return \Swagger\Client\Model\Address
+     * @return int
      */
-    public function getAddress()
+    public function getValue()
     {
-        return $this->container['address'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets address
+     * Sets value
      *
-     * @param \Swagger\Client\Model\Address $address address
+     * @param int $value value
      *
      * @return $this
      */
-    public function setAddress($address)
+    public function setValue($value)
     {
-        $this->container['address'] = $address;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets distance
+     * Gets vat_rate
      *
-     * @return \Swagger\Client\Model\Distance
+     * @return float
      */
-    public function getDistance()
+    public function getVatRate()
     {
-        return $this->container['distance'];
+        return $this->container['vat_rate'];
     }
 
     /**
-     * Sets distance
+     * Sets vat_rate
      *
-     * @param \Swagger\Client\Model\Distance $distance distance
+     * @param float $vat_rate vat_rate
      *
      * @return $this
      */
-    public function setDistance($distance)
+    public function setVatRate($vat_rate)
     {
-        $this->container['distance'] = $distance;
+        $this->container['vat_rate'] = $vat_rate;
 
         return $this;
     }
 
     /**
-     * Gets operational_hours
+     * Gets vat
      *
-     * @return \Swagger\Client\Model\OperationalHours
+     * @return int
      */
-    public function getOperationalHours()
+    public function getVat()
     {
-        return $this->container['operational_hours'];
+        return $this->container['vat'];
     }
 
     /**
-     * Sets operational_hours
+     * Sets vat
      *
-     * @param \Swagger\Client\Model\OperationalHours $operational_hours operational_hours
+     * @param int $vat vat
      *
      * @return $this
      */
-    public function setOperationalHours($operational_hours)
+    public function setVat($vat)
     {
-        $this->container['operational_hours'] = $operational_hours;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return map[string,string]
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param map[string,string] $meta meta
-     *
-     * @return $this
-     */
-    public function setMeta($meta)
-    {
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_type
-     *
-     * @return \Swagger\Client\Model\PickupLocationType
-     */
-    public function getLocationType()
-    {
-        return $this->container['location_type'];
-    }
-
-    /**
-     * Sets location_type
-     *
-     * @param \Swagger\Client\Model\PickupLocationType $location_type location_type
-     *
-     * @return $this
-     */
-    public function setLocationType($location_type)
-    {
-        $this->container['location_type'] = $location_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets sections
-     *
-     * @return \Swagger\Client\Model\Section[]
-     */
-    public function getSections()
-    {
-        return $this->container['sections'];
-    }
-
-    /**
-     * Sets sections
-     *
-     * @param \Swagger\Client\Model\Section[] $sections sections
-     *
-     * @return $this
-     */
-    public function setSections($sections)
-    {
-        $this->container['sections'] = $sections;
+        $this->container['vat'] = $vat;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PickupLocation
+ * ShippingLeg
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PickupLocation Class Doc Comment
+ * ShippingLeg Class Doc Comment
  *
  * @category Class
- * @description Contains information about the pickup service point as returned by the carrier.
+ * @description Represents a single step in the chained delivery.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PickupLocation implements ModelInterface, ArrayAccess
+class ShippingLeg implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PickupLocation';
+    protected static $swaggerModelName = 'ShippingLeg';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-'name' => 'string',
-'address' => '\Swagger\Client\Model\Address',
-'distance' => '\Swagger\Client\Model\Distance',
-'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\PickupLocationType',
-'sections' => '\Swagger\Client\Model\Section[]'    ];
+        'shipping_method' => 'string',
+'delivery_type' => 'string',
+'from' => '\Swagger\Client\Model\LegLocation',
+'to' => '\Swagger\Client\Model\LegLocation'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,14 +68,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-'name' => null,
-'address' => null,
-'distance' => null,
-'operational_hours' => null,
-'meta' => null,
-'location_type' => null,
-'sections' => null    ];
+        'shipping_method' => null,
+'delivery_type' => null,
+'from' => null,
+'to' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,14 +100,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'external_id',
-'name' => 'name',
-'address' => 'address',
-'distance' => 'distance',
-'operational_hours' => 'operational_hours',
-'meta' => 'meta',
-'location_type' => 'location_type',
-'sections' => 'sections'    ];
+        'shipping_method' => 'shipping_method',
+'delivery_type' => 'delivery_type',
+'from' => 'from',
+'to' => 'to'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,14 +111,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-'name' => 'setName',
-'address' => 'setAddress',
-'distance' => 'setDistance',
-'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
-'location_type' => 'setLocationType',
-'sections' => 'setSections'    ];
+        'shipping_method' => 'setShippingMethod',
+'delivery_type' => 'setDeliveryType',
+'from' => 'setFrom',
+'to' => 'setTo'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,14 +122,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-'name' => 'getName',
-'address' => 'getAddress',
-'distance' => 'getDistance',
-'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
-'location_type' => 'getLocationType',
-'sections' => 'getSections'    ];
+        'shipping_method' => 'getShippingMethod',
+'delivery_type' => 'getDeliveryType',
+'from' => 'getFrom',
+'to' => 'getTo'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,14 +185,10 @@ class PickupLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
-        $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
-        $this->container['sections'] = isset($data['sections']) ? $data['sections'] : null;
+        $this->container['shipping_method'] = isset($data['shipping_method']) ? $data['shipping_method'] : null;
+        $this->container['delivery_type'] = isset($data['delivery_type']) ? $data['delivery_type'] : null;
+        $this->container['from'] = isset($data['from']) ? $data['from'] : null;
+        $this->container['to'] = isset($data['to']) ? $data['to'] : null;
     }
 
     /**
@@ -240,193 +216,97 @@ class PickupLocation implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets external_id
+     * Gets shipping_method
      *
      * @return string
      */
-    public function getExternalId()
+    public function getShippingMethod()
     {
-        return $this->container['external_id'];
+        return $this->container['shipping_method'];
     }
 
     /**
-     * Sets external_id
+     * Sets shipping_method
      *
-     * @param string $external_id Carrier specific ID of the service point location returned by the carrier.
+     * @param string $shipping_method shipping_method
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setShippingMethod($shipping_method)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['shipping_method'] = $shipping_method;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets delivery_type
      *
      * @return string
      */
-    public function getName()
+    public function getDeliveryType()
     {
-        return $this->container['name'];
+        return $this->container['delivery_type'];
     }
 
     /**
-     * Sets name
+     * Sets delivery_type
      *
-     * @param string $name name
+     * @param string $delivery_type delivery_type
      *
      * @return $this
      */
-    public function setName($name)
+    public function setDeliveryType($delivery_type)
     {
-        $this->container['name'] = $name;
+        $this->container['delivery_type'] = $delivery_type;
 
         return $this;
     }
 
     /**
-     * Gets address
+     * Gets from
      *
-     * @return \Swagger\Client\Model\Address
+     * @return \Swagger\Client\Model\LegLocation
      */
-    public function getAddress()
+    public function getFrom()
     {
-        return $this->container['address'];
+        return $this->container['from'];
     }
 
     /**
-     * Sets address
+     * Sets from
      *
-     * @param \Swagger\Client\Model\Address $address address
+     * @param \Swagger\Client\Model\LegLocation $from from
      *
      * @return $this
      */
-    public function setAddress($address)
+    public function setFrom($from)
     {
-        $this->container['address'] = $address;
+        $this->container['from'] = $from;
 
         return $this;
     }
 
     /**
-     * Gets distance
+     * Gets to
      *
-     * @return \Swagger\Client\Model\Distance
+     * @return \Swagger\Client\Model\LegLocation
      */
-    public function getDistance()
+    public function getTo()
     {
-        return $this->container['distance'];
+        return $this->container['to'];
     }
 
     /**
-     * Sets distance
+     * Sets to
      *
-     * @param \Swagger\Client\Model\Distance $distance distance
+     * @param \Swagger\Client\Model\LegLocation $to to
      *
      * @return $this
      */
-    public function setDistance($distance)
+    public function setTo($to)
     {
-        $this->container['distance'] = $distance;
-
-        return $this;
-    }
-
-    /**
-     * Gets operational_hours
-     *
-     * @return \Swagger\Client\Model\OperationalHours
-     */
-    public function getOperationalHours()
-    {
-        return $this->container['operational_hours'];
-    }
-
-    /**
-     * Sets operational_hours
-     *
-     * @param \Swagger\Client\Model\OperationalHours $operational_hours operational_hours
-     *
-     * @return $this
-     */
-    public function setOperationalHours($operational_hours)
-    {
-        $this->container['operational_hours'] = $operational_hours;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return map[string,string]
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param map[string,string] $meta meta
-     *
-     * @return $this
-     */
-    public function setMeta($meta)
-    {
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_type
-     *
-     * @return \Swagger\Client\Model\PickupLocationType
-     */
-    public function getLocationType()
-    {
-        return $this->container['location_type'];
-    }
-
-    /**
-     * Sets location_type
-     *
-     * @param \Swagger\Client\Model\PickupLocationType $location_type location_type
-     *
-     * @return $this
-     */
-    public function setLocationType($location_type)
-    {
-        $this->container['location_type'] = $location_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets sections
-     *
-     * @return \Swagger\Client\Model\Section[]
-     */
-    public function getSections()
-    {
-        return $this->container['sections'];
-    }
-
-    /**
-     * Sets sections
-     *
-     * @param \Swagger\Client\Model\Section[] $sections sections
-     *
-     * @return $this
-     */
-    public function setSections($sections)
-    {
-        $this->container['sections'] = $sections;
+        $this->container['to'] = $to;
 
         return $this;
     }

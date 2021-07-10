@@ -1,6 +1,6 @@
 <?php
 /**
- * PickupLocation
+ * LegLocation
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PickupLocation Class Doc Comment
+ * LegLocation Class Doc Comment
  *
  * @category Class
- * @description Contains information about the pickup service point as returned by the carrier.
+ * @description LegLocation represents a location that takes part in a delivery.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PickupLocation implements ModelInterface, ArrayAccess
+class LegLocation implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PickupLocation';
+    protected static $swaggerModelName = 'LegLocation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-'name' => 'string',
-'address' => '\Swagger\Client\Model\Address',
-'distance' => '\Swagger\Client\Model\Distance',
-'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\PickupLocationType',
-'sections' => '\Swagger\Client\Model\Section[]'    ];
+        'address' => '\Swagger\Client\Model\Address',
+'location_type' => '\Swagger\Client\Model\LegLocationType',
+'external_id' => 'string'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,14 +67,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-'name' => null,
-'address' => null,
-'distance' => null,
-'operational_hours' => null,
-'meta' => null,
+        'address' => null,
 'location_type' => null,
-'sections' => null    ];
+'external_id' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,14 +98,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'external_id',
-'name' => 'name',
-'address' => 'address',
-'distance' => 'distance',
-'operational_hours' => 'operational_hours',
-'meta' => 'meta',
+        'address' => 'address',
 'location_type' => 'location_type',
-'sections' => 'sections'    ];
+'external_id' => 'external_id'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,14 +108,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-'name' => 'setName',
-'address' => 'setAddress',
-'distance' => 'setDistance',
-'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
+        'address' => 'setAddress',
 'location_type' => 'setLocationType',
-'sections' => 'setSections'    ];
+'external_id' => 'setExternalId'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,14 +118,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-'name' => 'getName',
-'address' => 'getAddress',
-'distance' => 'getDistance',
-'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
+        'address' => 'getAddress',
 'location_type' => 'getLocationType',
-'sections' => 'getSections'    ];
+'external_id' => 'getExternalId'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,14 +180,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
-        $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
         $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
-        $this->container['sections'] = isset($data['sections']) ? $data['sections'] : null;
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
     }
 
     /**
@@ -240,54 +210,6 @@ class PickupLocation implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets external_id
-     *
-     * @return string
-     */
-    public function getExternalId()
-    {
-        return $this->container['external_id'];
-    }
-
-    /**
-     * Sets external_id
-     *
-     * @param string $external_id Carrier specific ID of the service point location returned by the carrier.
-     *
-     * @return $this
-     */
-    public function setExternalId($external_id)
-    {
-        $this->container['external_id'] = $external_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
      * Gets address
      *
      * @return \Swagger\Client\Model\Address
@@ -312,81 +234,9 @@ class PickupLocation implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets distance
-     *
-     * @return \Swagger\Client\Model\Distance
-     */
-    public function getDistance()
-    {
-        return $this->container['distance'];
-    }
-
-    /**
-     * Sets distance
-     *
-     * @param \Swagger\Client\Model\Distance $distance distance
-     *
-     * @return $this
-     */
-    public function setDistance($distance)
-    {
-        $this->container['distance'] = $distance;
-
-        return $this;
-    }
-
-    /**
-     * Gets operational_hours
-     *
-     * @return \Swagger\Client\Model\OperationalHours
-     */
-    public function getOperationalHours()
-    {
-        return $this->container['operational_hours'];
-    }
-
-    /**
-     * Sets operational_hours
-     *
-     * @param \Swagger\Client\Model\OperationalHours $operational_hours operational_hours
-     *
-     * @return $this
-     */
-    public function setOperationalHours($operational_hours)
-    {
-        $this->container['operational_hours'] = $operational_hours;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return map[string,string]
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param map[string,string] $meta meta
-     *
-     * @return $this
-     */
-    public function setMeta($meta)
-    {
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
      * Gets location_type
      *
-     * @return \Swagger\Client\Model\PickupLocationType
+     * @return \Swagger\Client\Model\LegLocationType
      */
     public function getLocationType()
     {
@@ -396,7 +246,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
     /**
      * Sets location_type
      *
-     * @param \Swagger\Client\Model\PickupLocationType $location_type location_type
+     * @param \Swagger\Client\Model\LegLocationType $location_type location_type
      *
      * @return $this
      */
@@ -408,25 +258,25 @@ class PickupLocation implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets sections
+     * Gets external_id
      *
-     * @return \Swagger\Client\Model\Section[]
+     * @return string
      */
-    public function getSections()
+    public function getExternalId()
     {
-        return $this->container['sections'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets sections
+     * Sets external_id
      *
-     * @param \Swagger\Client\Model\Section[] $sections sections
+     * @param string $external_id external_id
      *
      * @return $this
      */
-    public function setSections($sections)
+    public function setExternalId($external_id)
     {
-        $this->container['sections'] = $sections;
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
