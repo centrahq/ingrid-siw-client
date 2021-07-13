@@ -1,6 +1,6 @@
 <?php
 /**
- * CompleteSessionResponse
+ * LegLocationType
  *
  * PHP version 5
  *
@@ -32,14 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * CompleteSessionResponse Class Doc Comment
+ * LegLocationType Class Doc Comment
  *
  * @category Class
+ * @description Represents the type of location which takes part in a delivery. Values: 0 - UNKNOWN 1 - WAREHOUSE 2 - STORE 3 - HOME
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CompleteSessionResponse implements ModelInterface, ArrayAccess
+class LegLocationType implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +49,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CompleteSessionResponse';
+    protected static $swaggerModelName = 'LegLocationType';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +57,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'session' => '\Swagger\Client\Model\Session',
-'tos_id' => 'string'    ];
+            ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +65,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'session' => null,
-'tos_id' => null    ];
+            ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +94,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-'tos_id' => 'tos_id'    ];
+            ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +102,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-'tos_id' => 'setTosId'    ];
+            ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +110,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-'tos_id' => 'getTosId'    ];
+            ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +170,6 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['tos_id'] = isset($data['tos_id']) ? $data['tos_id'] : null;
     }
 
     /**
@@ -201,54 +195,6 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets session
-     *
-     * @return \Swagger\Client\Model\Session
-     */
-    public function getSession()
-    {
-        return $this->container['session'];
-    }
-
-    /**
-     * Sets session
-     *
-     * @param \Swagger\Client\Model\Session $session session
-     *
-     * @return $this
-     */
-    public function setSession($session)
-    {
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets tos_id
-     *
-     * @return string
-     */
-    public function getTosId()
-    {
-        return $this->container['tos_id'];
-    }
-
-    /**
-     * Sets tos_id
-     *
-     * @param string $tos_id tos_id
-     *
-     * @return $this
-     */
-    public function setTosId($tos_id)
-    {
-        $this->container['tos_id'] = $tos_id;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

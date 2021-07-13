@@ -1,6 +1,6 @@
 <?php
 /**
- * PickupLocation
+ * Result
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * PickupLocation Class Doc Comment
+ * Result Class Doc Comment
  *
  * @category Class
- * @description Contains information about the pickup service point as returned by the carrier.
+ * @description Summary of the shipment.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class PickupLocation implements ModelInterface, ArrayAccess
+class Result implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PickupLocation implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PickupLocation';
+    protected static $swaggerModelName = 'Result';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'external_id' => 'string',
-'name' => 'string',
-'address' => '\Swagger\Client\Model\Address',
-'distance' => '\Swagger\Client\Model\Distance',
-'operational_hours' => '\Swagger\Client\Model\OperationalHours',
-'meta' => 'map[string,string]',
-'location_type' => '\Swagger\Client\Model\PickupLocationType',
-'sections' => '\Swagger\Client\Model\Section[]'    ];
+        'shipping' => '\Swagger\Client\Model\ResultShipping',
+'category' => '\Swagger\Client\Model\ResultCategory',
+'pricing' => '\Swagger\Client\Model\ResultPricing',
+'selection' => '\Swagger\Client\Model\ResultSelection',
+'delivery_time' => '\Swagger\Client\Model\ResultDeliveryTime'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -72,14 +69,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'external_id' => null,
-'name' => null,
-'address' => null,
-'distance' => null,
-'operational_hours' => null,
-'meta' => null,
-'location_type' => null,
-'sections' => null    ];
+        'shipping' => null,
+'category' => null,
+'pricing' => null,
+'selection' => null,
+'delivery_time' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -108,14 +102,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'external_id' => 'external_id',
-'name' => 'name',
-'address' => 'address',
-'distance' => 'distance',
-'operational_hours' => 'operational_hours',
-'meta' => 'meta',
-'location_type' => 'location_type',
-'sections' => 'sections'    ];
+        'shipping' => 'shipping',
+'category' => 'category',
+'pricing' => 'pricing',
+'selection' => 'selection',
+'delivery_time' => 'delivery_time'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -123,14 +114,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'external_id' => 'setExternalId',
-'name' => 'setName',
-'address' => 'setAddress',
-'distance' => 'setDistance',
-'operational_hours' => 'setOperationalHours',
-'meta' => 'setMeta',
-'location_type' => 'setLocationType',
-'sections' => 'setSections'    ];
+        'shipping' => 'setShipping',
+'category' => 'setCategory',
+'pricing' => 'setPricing',
+'selection' => 'setSelection',
+'delivery_time' => 'setDeliveryTime'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -138,14 +126,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'external_id' => 'getExternalId',
-'name' => 'getName',
-'address' => 'getAddress',
-'distance' => 'getDistance',
-'operational_hours' => 'getOperationalHours',
-'meta' => 'getMeta',
-'location_type' => 'getLocationType',
-'sections' => 'getSections'    ];
+        'shipping' => 'getShipping',
+'category' => 'getCategory',
+'pricing' => 'getPricing',
+'selection' => 'getSelection',
+'delivery_time' => 'getDeliveryTime'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -205,14 +190,11 @@ class PickupLocation implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['address'] = isset($data['address']) ? $data['address'] : null;
-        $this->container['distance'] = isset($data['distance']) ? $data['distance'] : null;
-        $this->container['operational_hours'] = isset($data['operational_hours']) ? $data['operational_hours'] : null;
-        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
-        $this->container['location_type'] = isset($data['location_type']) ? $data['location_type'] : null;
-        $this->container['sections'] = isset($data['sections']) ? $data['sections'] : null;
+        $this->container['shipping'] = isset($data['shipping']) ? $data['shipping'] : null;
+        $this->container['category'] = isset($data['category']) ? $data['category'] : null;
+        $this->container['pricing'] = isset($data['pricing']) ? $data['pricing'] : null;
+        $this->container['selection'] = isset($data['selection']) ? $data['selection'] : null;
+        $this->container['delivery_time'] = isset($data['delivery_time']) ? $data['delivery_time'] : null;
     }
 
     /**
@@ -240,193 +222,121 @@ class PickupLocation implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets external_id
+     * Gets shipping
      *
-     * @return string
+     * @return \Swagger\Client\Model\ResultShipping
      */
-    public function getExternalId()
+    public function getShipping()
     {
-        return $this->container['external_id'];
+        return $this->container['shipping'];
     }
 
     /**
-     * Sets external_id
+     * Sets shipping
      *
-     * @param string $external_id Carrier specific ID of the service point location returned by the carrier.
+     * @param \Swagger\Client\Model\ResultShipping $shipping shipping
      *
      * @return $this
      */
-    public function setExternalId($external_id)
+    public function setShipping($shipping)
     {
-        $this->container['external_id'] = $external_id;
+        $this->container['shipping'] = $shipping;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets category
      *
-     * @return string
+     * @return \Swagger\Client\Model\ResultCategory
      */
-    public function getName()
+    public function getCategory()
     {
-        return $this->container['name'];
+        return $this->container['category'];
     }
 
     /**
-     * Sets name
+     * Sets category
      *
-     * @param string $name name
+     * @param \Swagger\Client\Model\ResultCategory $category category
      *
      * @return $this
      */
-    public function setName($name)
+    public function setCategory($category)
     {
-        $this->container['name'] = $name;
+        $this->container['category'] = $category;
 
         return $this;
     }
 
     /**
-     * Gets address
+     * Gets pricing
      *
-     * @return \Swagger\Client\Model\Address
+     * @return \Swagger\Client\Model\ResultPricing
      */
-    public function getAddress()
+    public function getPricing()
     {
-        return $this->container['address'];
+        return $this->container['pricing'];
     }
 
     /**
-     * Sets address
+     * Sets pricing
      *
-     * @param \Swagger\Client\Model\Address $address address
+     * @param \Swagger\Client\Model\ResultPricing $pricing pricing
      *
      * @return $this
      */
-    public function setAddress($address)
+    public function setPricing($pricing)
     {
-        $this->container['address'] = $address;
+        $this->container['pricing'] = $pricing;
 
         return $this;
     }
 
     /**
-     * Gets distance
+     * Gets selection
      *
-     * @return \Swagger\Client\Model\Distance
+     * @return \Swagger\Client\Model\ResultSelection
      */
-    public function getDistance()
+    public function getSelection()
     {
-        return $this->container['distance'];
+        return $this->container['selection'];
     }
 
     /**
-     * Sets distance
+     * Sets selection
      *
-     * @param \Swagger\Client\Model\Distance $distance distance
+     * @param \Swagger\Client\Model\ResultSelection $selection selection
      *
      * @return $this
      */
-    public function setDistance($distance)
+    public function setSelection($selection)
     {
-        $this->container['distance'] = $distance;
+        $this->container['selection'] = $selection;
 
         return $this;
     }
 
     /**
-     * Gets operational_hours
+     * Gets delivery_time
      *
-     * @return \Swagger\Client\Model\OperationalHours
+     * @return \Swagger\Client\Model\ResultDeliveryTime
      */
-    public function getOperationalHours()
+    public function getDeliveryTime()
     {
-        return $this->container['operational_hours'];
+        return $this->container['delivery_time'];
     }
 
     /**
-     * Sets operational_hours
+     * Sets delivery_time
      *
-     * @param \Swagger\Client\Model\OperationalHours $operational_hours operational_hours
+     * @param \Swagger\Client\Model\ResultDeliveryTime $delivery_time delivery_time
      *
      * @return $this
      */
-    public function setOperationalHours($operational_hours)
+    public function setDeliveryTime($delivery_time)
     {
-        $this->container['operational_hours'] = $operational_hours;
-
-        return $this;
-    }
-
-    /**
-     * Gets meta
-     *
-     * @return map[string,string]
-     */
-    public function getMeta()
-    {
-        return $this->container['meta'];
-    }
-
-    /**
-     * Sets meta
-     *
-     * @param map[string,string] $meta meta
-     *
-     * @return $this
-     */
-    public function setMeta($meta)
-    {
-        $this->container['meta'] = $meta;
-
-        return $this;
-    }
-
-    /**
-     * Gets location_type
-     *
-     * @return \Swagger\Client\Model\PickupLocationType
-     */
-    public function getLocationType()
-    {
-        return $this->container['location_type'];
-    }
-
-    /**
-     * Sets location_type
-     *
-     * @param \Swagger\Client\Model\PickupLocationType $location_type location_type
-     *
-     * @return $this
-     */
-    public function setLocationType($location_type)
-    {
-        $this->container['location_type'] = $location_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets sections
-     *
-     * @return \Swagger\Client\Model\Section[]
-     */
-    public function getSections()
-    {
-        return $this->container['sections'];
-    }
-
-    /**
-     * Sets sections
-     *
-     * @param \Swagger\Client\Model\Section[] $sections sections
-     *
-     * @return $this
-     */
-    public function setSections($sections)
-    {
-        $this->container['sections'] = $sections;
+        $this->container['delivery_time'] = $delivery_time;
 
         return $this;
     }

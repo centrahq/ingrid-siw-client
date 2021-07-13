@@ -1,6 +1,6 @@
 <?php
 /**
- * CompleteSessionResponse
+ * ShippingCost
  *
  * PHP version 5
  *
@@ -32,14 +32,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * CompleteSessionResponse Class Doc Comment
+ * ShippingCost Class Doc Comment
  *
  * @category Class
+ * @description Detailed information about the shipping cost.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CompleteSessionResponse implements ModelInterface, ArrayAccess
+class ShippingCost implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +49,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CompleteSessionResponse';
+    protected static $swaggerModelName = 'ShippingCost';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +57,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'session' => '\Swagger\Client\Model\Session',
-'tos_id' => 'string'    ];
+        'billing_items' => '\Swagger\Client\Model\BillingItem[]',
+'total_cost' => '\Swagger\Client\Model\Cost'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +66,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'session' => null,
-'tos_id' => null    ];
+        'billing_items' => null,
+'total_cost' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +96,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-'tos_id' => 'tos_id'    ];
+        'billing_items' => 'billing_items',
+'total_cost' => 'total_cost'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +105,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-'tos_id' => 'setTosId'    ];
+        'billing_items' => 'setBillingItems',
+'total_cost' => 'setTotalCost'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +114,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-'tos_id' => 'getTosId'    ];
+        'billing_items' => 'getBillingItems',
+'total_cost' => 'getTotalCost'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +175,8 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['tos_id'] = isset($data['tos_id']) ? $data['tos_id'] : null;
+        $this->container['billing_items'] = isset($data['billing_items']) ? $data['billing_items'] : null;
+        $this->container['total_cost'] = isset($data['total_cost']) ? $data['total_cost'] : null;
     }
 
     /**
@@ -203,49 +204,49 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets session
+     * Gets billing_items
      *
-     * @return \Swagger\Client\Model\Session
+     * @return \Swagger\Client\Model\BillingItem[]
      */
-    public function getSession()
+    public function getBillingItems()
     {
-        return $this->container['session'];
+        return $this->container['billing_items'];
     }
 
     /**
-     * Sets session
+     * Sets billing_items
      *
-     * @param \Swagger\Client\Model\Session $session session
+     * @param \Swagger\Client\Model\BillingItem[] $billing_items billing_items
      *
      * @return $this
      */
-    public function setSession($session)
+    public function setBillingItems($billing_items)
     {
-        $this->container['session'] = $session;
+        $this->container['billing_items'] = $billing_items;
 
         return $this;
     }
 
     /**
-     * Gets tos_id
+     * Gets total_cost
      *
-     * @return string
+     * @return \Swagger\Client\Model\Cost
      */
-    public function getTosId()
+    public function getTotalCost()
     {
-        return $this->container['tos_id'];
+        return $this->container['total_cost'];
     }
 
     /**
-     * Sets tos_id
+     * Sets total_cost
      *
-     * @param string $tos_id tos_id
+     * @param \Swagger\Client\Model\Cost $total_cost total_cost
      *
      * @return $this
      */
-    public function setTosId($tos_id)
+    public function setTotalCost($total_cost)
     {
-        $this->container['tos_id'] = $tos_id;
+        $this->container['total_cost'] = $total_cost;
 
         return $this;
     }

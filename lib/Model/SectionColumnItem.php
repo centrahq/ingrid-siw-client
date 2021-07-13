@@ -1,6 +1,6 @@
 <?php
 /**
- * CompleteSessionResponse
+ * SectionColumnItem
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * CompleteSessionResponse Class Doc Comment
+ * SectionColumnItem Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class CompleteSessionResponse implements ModelInterface, ArrayAccess
+class SectionColumnItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'CompleteSessionResponse';
+    protected static $swaggerModelName = 'SectionColumnItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'session' => '\Swagger\Client\Model\Session',
-'tos_id' => 'string'    ];
+        'items' => '\Swagger\Client\Model\SectionItem[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -65,8 +64,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'session' => null,
-'tos_id' => null    ];
+        'items' => null    ];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -95,8 +93,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-'tos_id' => 'tos_id'    ];
+        'items' => 'items'    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -104,8 +101,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-'tos_id' => 'setTosId'    ];
+        'items' => 'setItems'    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
@@ -113,8 +109,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-'tos_id' => 'getTosId'    ];
+        'items' => 'getItems'    ];
 
     /**
      * Array of attributes where the key is the local name,
@@ -174,8 +169,7 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['tos_id'] = isset($data['tos_id']) ? $data['tos_id'] : null;
+        $this->container['items'] = isset($data['items']) ? $data['items'] : null;
     }
 
     /**
@@ -203,49 +197,25 @@ class CompleteSessionResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets session
+     * Gets items
      *
-     * @return \Swagger\Client\Model\Session
+     * @return \Swagger\Client\Model\SectionItem[]
      */
-    public function getSession()
+    public function getItems()
     {
-        return $this->container['session'];
+        return $this->container['items'];
     }
 
     /**
-     * Sets session
+     * Sets items
      *
-     * @param \Swagger\Client\Model\Session $session session
+     * @param \Swagger\Client\Model\SectionItem[] $items items
      *
      * @return $this
      */
-    public function setSession($session)
+    public function setItems($items)
     {
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets tos_id
-     *
-     * @return string
-     */
-    public function getTosId()
-    {
-        return $this->container['tos_id'];
-    }
-
-    /**
-     * Sets tos_id
-     *
-     * @param string $tos_id tos_id
-     *
-     * @return $this
-     */
-    public function setTosId($tos_id)
-    {
-        $this->container['tos_id'] = $tos_id;
+        $this->container['items'] = $items;
 
         return $this;
     }
