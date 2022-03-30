@@ -1,6 +1,6 @@
 <?php
 /**
- * GetSessionResponse
+ * CreateSessionFromOrderRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * GetSessionResponse Class Doc Comment
+ * CreateSessionFromOrderRequest Class Doc Comment
  *
  * @category Class
+ * @description Contains the required information to initialize session from transport order.
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class GetSessionResponse implements ModelInterface, ArrayAccess
+class CreateSessionFromOrderRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'GetSessionResponse';
+    protected static $swaggerModelName = 'CreateSessionFromOrderRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'html_snippet' => 'string',
-        'session' => '\Swagger\Client\Model\Session'
+        'external_id' => 'string',
+        'locales' => 'string[]',
+        'meta' => 'map[string,string]',
+        'snippet_configuration' => '\Swagger\Client\Model\SnippetConfiguration',
+        'tos_id' => 'string'
     ];
 
     /**
@@ -67,8 +71,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'html_snippet' => null,
-        'session' => null
+        'external_id' => null,
+        'locales' => null,
+        'meta' => null,
+        'snippet_configuration' => null,
+        'tos_id' => null
     ];
 
     /**
@@ -98,8 +105,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'html_snippet' => 'html_snippet',
-        'session' => 'session'
+        'external_id' => 'external_id',
+        'locales' => 'locales',
+        'meta' => 'meta',
+        'snippet_configuration' => 'snippet_configuration',
+        'tos_id' => 'tos_id'
     ];
 
     /**
@@ -108,8 +118,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'html_snippet' => 'setHtmlSnippet',
-        'session' => 'setSession'
+        'external_id' => 'setExternalId',
+        'locales' => 'setLocales',
+        'meta' => 'setMeta',
+        'snippet_configuration' => 'setSnippetConfiguration',
+        'tos_id' => 'setTosId'
     ];
 
     /**
@@ -118,8 +131,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'html_snippet' => 'getHtmlSnippet',
-        'session' => 'getSession'
+        'external_id' => 'getExternalId',
+        'locales' => 'getLocales',
+        'meta' => 'getMeta',
+        'snippet_configuration' => 'getSnippetConfiguration',
+        'tos_id' => 'getTosId'
     ];
 
     /**
@@ -182,8 +198,11 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['html_snippet'] = isset($data['html_snippet']) ? $data['html_snippet'] : null;
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
+        $this->container['external_id'] = isset($data['external_id']) ? $data['external_id'] : null;
+        $this->container['locales'] = isset($data['locales']) ? $data['locales'] : null;
+        $this->container['meta'] = isset($data['meta']) ? $data['meta'] : null;
+        $this->container['snippet_configuration'] = isset($data['snippet_configuration']) ? $data['snippet_configuration'] : null;
+        $this->container['tos_id'] = isset($data['tos_id']) ? $data['tos_id'] : null;
     }
 
     /**
@@ -211,49 +230,121 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets html_snippet
+     * Gets external_id
      *
      * @return string
      */
-    public function getHtmlSnippet()
+    public function getExternalId()
     {
-        return $this->container['html_snippet'];
+        return $this->container['external_id'];
     }
 
     /**
-     * Sets html_snippet
+     * Sets external_id
      *
-     * @param string $html_snippet html_snippet
+     * @param string $external_id external_id
      *
      * @return $this
      */
-    public function setHtmlSnippet($html_snippet)
+    public function setExternalId($external_id)
     {
-        $this->container['html_snippet'] = $html_snippet;
+        $this->container['external_id'] = $external_id;
 
         return $this;
     }
 
     /**
-     * Gets session
+     * Gets locales
      *
-     * @return \Swagger\Client\Model\Session
+     * @return string[]
      */
-    public function getSession()
+    public function getLocales()
     {
-        return $this->container['session'];
+        return $this->container['locales'];
     }
 
     /**
-     * Sets session
+     * Sets locales
      *
-     * @param \Swagger\Client\Model\Session $session session
+     * @param string[] $locales locales
      *
      * @return $this
      */
-    public function setSession($session)
+    public function setLocales($locales)
     {
-        $this->container['session'] = $session;
+        $this->container['locales'] = $locales;
+
+        return $this;
+    }
+
+    /**
+     * Gets meta
+     *
+     * @return map[string,string]
+     */
+    public function getMeta()
+    {
+        return $this->container['meta'];
+    }
+
+    /**
+     * Sets meta
+     *
+     * @param map[string,string] $meta Generic key/value object that is used for supplying complementing information.
+     *
+     * @return $this
+     */
+    public function setMeta($meta)
+    {
+        $this->container['meta'] = $meta;
+
+        return $this;
+    }
+
+    /**
+     * Gets snippet_configuration
+     *
+     * @return \Swagger\Client\Model\SnippetConfiguration
+     */
+    public function getSnippetConfiguration()
+    {
+        return $this->container['snippet_configuration'];
+    }
+
+    /**
+     * Sets snippet_configuration
+     *
+     * @param \Swagger\Client\Model\SnippetConfiguration $snippet_configuration Snippet configuration allows using custom ids in html snippet. This useful, if there are multiple widgets embedded on the same page.
+     *
+     * @return $this
+     */
+    public function setSnippetConfiguration($snippet_configuration)
+    {
+        $this->container['snippet_configuration'] = $snippet_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets tos_id
+     *
+     * @return string
+     */
+    public function getTosId()
+    {
+        return $this->container['tos_id'];
+    }
+
+    /**
+     * Sets tos_id
+     *
+     * @param string $tos_id tos_id
+     *
+     * @return $this
+     */
+    public function setTosId($tos_id)
+    {
+        $this->container['tos_id'] = $tos_id;
 
         return $this;
     }

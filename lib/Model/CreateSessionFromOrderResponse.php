@@ -1,6 +1,6 @@
 <?php
 /**
- * GetSessionResponse
+ * CreateSessionFromOrderResponse
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Swagger\Client\ObjectSerializer;
 
 /**
- * GetSessionResponse Class Doc Comment
+ * CreateSessionFromOrderResponse Class Doc Comment
  *
  * @category Class
  * @package  Swagger\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class GetSessionResponse implements ModelInterface, ArrayAccess
+class CreateSessionFromOrderResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class GetSessionResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'GetSessionResponse';
+    protected static $swaggerModelName = 'CreateSessionFromOrderResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
